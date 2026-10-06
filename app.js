@@ -93,3 +93,35 @@ guardarCookie("visitas", visitas, 30 * 24 * 60 * 60);
 let mensajeVisitas = document.createElement("p");
 mensajeVisitas.textContent = "Has visitado esta página " + visitas + " veces";
 document.body.appendChild(mensajeVisitas);
+
+// Botón para cambiar el nombre
+document.getElementById("cambiarNombre").addEventListener("click", function () {
+    let nuevoNombre = prompt("¿Cuál es tu nuevo nombre?");
+
+    if (nuevoNombre !== null && nuevoNombre !== "") {
+        usuario = nuevoNombre;
+
+        guardarCookie("usuario", usuario, 30 * 24 * 60 * 60);
+
+        if (idiomaGuardado === "en") {
+            document.getElementById("saludo").textContent = "Hello again, " + usuario;
+        } else {
+            document.getElementById("saludo").textContent = "Hola de nuevo, " + usuario;
+        }
+    }
+});
+
+// Botón para olvidarme
+document.getElementById("olvidarme").addEventListener("click", function () {
+    let confirmar = confirm("¿Seguro que quieres borrar todos tus datos?");
+
+    if (confirmar) {
+        document.cookie = "usuario=; max-age=0";
+        document.cookie = "tema=; max-age=0";
+        document.cookie = "idioma=; max-age=0";
+        document.cookie = "visitas=; max-age=0";
+
+        alert("Tus datos han sido borrados.");
+        location.reload();
+    }
+});
