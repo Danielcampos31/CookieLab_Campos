@@ -77,3 +77,19 @@ selectorIdioma.addEventListener("change", function () {
         document.getElementById("saludo").textContent = "Hola de nuevo, " + usuario;
     }
 });
+
+// Contador de visitas
+let visitas = leerCookie("visitas");
+
+if (visitas === null) {
+    visitas = 1;
+} else {
+    visitas = Number(visitas) + 1;
+}
+
+guardarCookie("visitas", visitas, 30 * 24 * 60 * 60);
+
+// Mostrar el número de visitas
+let mensajeVisitas = document.createElement("p");
+mensajeVisitas.textContent = "Has visitado esta página " + visitas + " veces";
+document.body.appendChild(mensajeVisitas);
